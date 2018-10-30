@@ -2,25 +2,35 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
+  <link rel="stylesheet" href="style.css" />
   <title>Exercice 3</title>
 </head>
 <body>
   <div ng-app>
-    <form action="index.html" method="post">
-      <label for="">Nom :</label>
-      <input type="text" name="name" required/>
-      <br/>
+    <form name="myForm" ng-submit="foo()" novalidate>
+      <label>Nom :</label>
+      <input type="text" name="peoplenameName" ng-model="nameModel" ng-minLength="3" ng-maxLength="15" required />
+      <!-- j'utilise les messages d'erreur envoyer par le myForm en fonction de ce qui est demander
+      et je fait apparaitre un message en fonction de l'erreur reçu.  -->
+      <div ng-show="myForm.peoplenameName.$error.required">champ vide</div>
+      <div ng-show="myForm.peoplenameName.$error.minlength">3 lettres minimun</div>
+      <div ng-show="myForm.peoplenameName.$error.maxlength">15 lettres max</div>
       <label for="">Mail :</label>
-      <input type="email" name="mail" required/>
-      <br/>
+      <input type="email" name="mail" ng-model="mailModel" required />
+      <div ng-show="myForm.mail.$error.required">champ vide</div>
+      <div ng-show="myForm.mail.$error.email">il faut une adresse mail valide.</div>
       <label for="">Sujet :</label>
-      <input type="text" name="subjet" required/>
-      <br/>
+      <input type="text" name="subjetName" ng-model=subjetModel required />
+      <div ng-show="myForm.subjetName.$error.required">champ vide</div>
       <label for="">Texte :</label>
-      <textarea name="text" rows="3" cols="33"></textarea>
+      <textarea name="textName" ng-model="textareaModel" ng-minLength="10" ng-maxLength="80"rows="3" cols="33" required></textarea>
+      <div ng-show="myForm.textName.$error.required">champ vide</div>
+      <div ng-show="myForm.textName.$error.minlength">10 lettres minimun</div>
+      <div ng-show="myForm.textName.$error.maxlength">80 lettres max</div>
+      <input type="submit" name="buttonCoucou" value="Coucou">
     </form>
   </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+  <script src="Angular/angular.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
